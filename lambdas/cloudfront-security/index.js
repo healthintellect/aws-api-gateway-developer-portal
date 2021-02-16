@@ -12,7 +12,7 @@ const headersToAdd = {
       "font-src 'self' data: fonts.gstatic.com",
       "img-src 'self' data:",
       "script-src 'self' 'unsafe-inline'",
-      "style-src 'self' fonts.googleapis.com"
+      "style-src 'self' 'unsafe-inline' fonts.googleapis.com"
     ].join(';')
   }],
   'x-content-type-options': [{ value: 'nosniff' }],
