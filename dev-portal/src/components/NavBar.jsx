@@ -40,6 +40,10 @@ export const NavBar = observer(
         </MenuLink>
 
         <MenuLink to='/getting-started'>{fragments.GettingStarted.title}</MenuLink>
+        <MenuLink to='/farser'>Farser</MenuLink>
+        <MenuLink to='/rosetta'>Rosetta</MenuLink>
+        <MenuLink to='/juxtapose'>Juxtapose</MenuLink>
+        <MenuLink to='/mirage'>Mirage</MenuLink>
         <MenuLink to='/apis'>{fragments.APIs.title}</MenuLink>
 
         <Menu.Menu position='right'>

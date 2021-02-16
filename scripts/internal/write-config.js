@@ -15,7 +15,7 @@ module.exports = async () => {
 
   const result = await execPipe('aws', [
     'cloudformation', 'describe-stacks',
-    '--stack-name', deployerConfig.stackName,
+    '--stack-name', deployerConfig.stackName, '--output=json',
     ...(deployerConfig.awsSamCliProfile ? ['--profile', deployerConfig.awsSamCliProfile] : [])
   ])
   const websiteUrl = JSON.parse(result.toString('utf-8')).Stacks[0].Outputs

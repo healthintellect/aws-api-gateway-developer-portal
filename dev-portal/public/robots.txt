@@ -1,0 +1,19 @@
+# Group 1
+User-agent: *
+Disallow: /dashboard
+Disallow: /facade
+Disallow: /hipaa
+Disallow: /account
+Disallow: /verify-email
+Disallow: /reset-password
+Disallow: /forgot-password
+Disallow: /admin
+Disallow: /logout
+Disallow: /privacy
+Disallow: /terms
+
+# Group 2
+User-agent: *
+Allow: /
+
+Sitemap: https://hl7.cc/sitemap.xml

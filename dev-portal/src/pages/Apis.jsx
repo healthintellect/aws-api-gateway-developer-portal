@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import React from 'react'
+import { Helmet } from 'react-helmet'
 
 // swagger-ui
 import SwaggerUI from 'swagger-ui'
@@ -91,6 +92,14 @@ export default observer(class ApisPage extends React.Component {
         sidebarContent={<ApisMenu path={this.props.match} activateFirst={true} />}
         SidebarPusherProps={{ className: 'swagger-section' }}
       >
+        <Helmet>
+          <title>APIs - HL7.cc Tools</title>
+          <meta
+            name="description"
+            content="The Rosetta API can be used to convert HL7 messages into FHIR resources and the Mirage API can be used to generate HL7 data with fake patient/provider information."
+          />
+          <link rel="canonical" href="https://hl7.cc/apis" />
+        </Helmet>
         <div className='swagger-ui-wrap' ref={this.containerRef} style={{ padding: '0 20px' }}>
           {errorHeader && errorBody && (
             <>

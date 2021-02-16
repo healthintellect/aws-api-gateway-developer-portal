@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import React from 'react'
+import { Helmet } from 'react-helmet'
 
 // mobx
 import { observer } from 'mobx-react'
@@ -17,6 +18,14 @@ import { Header, Segment, Container, Image, Button } from 'semantic-ui-react'
 
 export const HomePage = observer(() => (
   <>
+    <Helmet>
+      <title>HL7.cc Tools</title>
+      <meta
+        name="description"
+        content="HL7.cc tools are used to assist developers with parsing HL7 messages, comparing HL7 messages, generating sample HL7 data, and converting HL7 messages into FHIR resources."
+      />
+      <link rel="canonical" href="https://hl7.cc/" />
+    </Helmet> 
     <Segment vertical textAlign='center' style={{ color: 'whitesmoke', backgroundColor: 'slategray', padding: '40px 0px', margin: '0px !important' }}>
       <Image centered size='small' src='/custom-content/home-image.png' />
       <Header as='h1' style={{ color: 'whitesmoke' }}>{fragments.Home.header}</Header>
