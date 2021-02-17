@@ -489,24 +489,6 @@ class MirageHl7 extends PureComponent {
                     <Grid container spacing={1} direction='column'>
                       <Grid item xs={12}>
                         <Box display='flex'>
-                          <Link
-                            to={`/farser${
-                              fakeMessage
-                                ? `?premessage=${encodeURIComponent(
-                                    fakeMessage.replace(/(\r\n|\n|\r)/gm, '\n')
-                                  )}`
-                                : ''
-                            }`}
-                            style={{ textDecoration: 'none' }}
-                          >
-                            <Button
-                              variant='contained'
-                              color='primary'
-                              className={classes.copyButton}
-                            >
-                              Open Message in Farser
-                            </Button>
-                          </Link>
                           <div className={classes.messageButtons}></div>
                           <Tooltip
                             title='Copy message'
