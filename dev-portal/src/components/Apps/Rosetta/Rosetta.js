@@ -15,7 +15,10 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  CircularProgress
+  CircularProgress,
+  Dialog,
+  DialogTitle,
+  DialogActions
 } from '@material-ui/core'
 import {
   Close as CloseIcon,
@@ -34,6 +37,7 @@ import Iframe from 'react-iframe'
 import { observer } from 'mobx-react'
 
 import settings from '../../../settings'
+import { getCognitoUrl } from '../../../services/self'
 import TextEditor from '../../TextEditor'
 import Sidebar from './Sidebar'
 
@@ -78,6 +82,11 @@ const useStyles = makeStyles((theme) => ({
     left: 'auto',
     position: 'float',
     zIndex: 9
+  },
+  dialogBody: {
+    padding: theme.spacing(1),
+    textAlign: 'left',
+    color: theme.palette.text.secondary
   }
 }), { index: 1 })
 
@@ -93,6 +102,7 @@ const Rosetta = observer(() => {
   const [isConverting, setIsConverting] = useState(false)
   const [convertError, setConvertError] = useState(false)
   const [convertDisabled, setConvertDisabled] = useState(true)
+  const [showHelp, setShowHelp] = useState(false)
 
   const toggleSnackbar = (message) => {
     setSnackbarOpen(!snackbarOpen)
@@ -238,6 +248,10 @@ const Rosetta = observer(() => {
     updateConvertStatus()
   })
 
+  const toggleHelpDialog = () => {
+    setShowHelp(!showHelp)
+  }
+
   return (
     <div className={classes.root}>
       <Helmet>
@@ -272,19 +286,29 @@ const Rosetta = observer(() => {
           </IconButton>
         ]}
       />
-      <Grid container spacing={3} direction='row'>
-        <Grid item xs={12}>
-          <Box display='flex' justifyContent='center' margin='18px'>
-            <Typography>
-              Paste a HL7 or CCDA message into the Message to Convert box and
-              then choose a FHIR template from the Message Templates sidebar
-              menu. Finally, click the center blue recycle button and then your
+      <Dialog onClose={toggleHelpDialog} aria-labelledby="help-dialog-title" open={showHelp}>
+        <DialogTitle id="help-dialog-title">How to Use Rosetta</DialogTitle>
+        <div className={classes.dialogBody}>
+          <ol>
+            <li>Provide a source messages that will be used to populate the patient data in the FHIR resource</li>
+            <ul>
+              <li>Option 1: Paste your HL7 or CDA message into the Message to Convert box</li>
+              <li>Option 2: Choose a sample HL7 or CDA from the sidebar menu</li>
+            </ul>
+            <li>Choose a HL7 or CDA handlebars template from the Message Templates sidebar menu</li>
+            <ul>
+              <li>Option 1: Choose a sample HL7 or CDA from the sidebar menu</li>
+              <li>Option 2: Create your own handlebars template in the FHIR Template box</li>
+            </ul>
+            <li>Click the convert button <Sync /></li>
+            <li>Your
               HL7v2 or CCDA message will then be converted and displayed in the
-              Converted FHIR Message editor.
-            </Typography>
-          </Box>
-        </Grid>
-      </Grid>
+              Converted FHIR Message editor.</li>
+          </ol>
+          <DialogActions>
+            <Typography variant="caption"><a href={getCognitoUrl('login')}>Signup for a developer account</a> for access to receive an API key and get access to Swagger API documentation.</Typography></DialogActions>
+        </div>
+      </Dialog>
       <Grid container spacing={1} direction='row'>
         <Grid item xs={2}>
           <Sidebar
@@ -298,6 +322,7 @@ const Rosetta = observer(() => {
             updateConvertStatus={updateConvertStatus}
             setSnackbarOpen={setSnackbarOpen}
             setSnackbarMessage={setSnackbarMessage}
+            toggleHelpDialog={toggleHelpDialog}
           />
         </Grid>
         <Grid item xs={10} height='207%'>
@@ -462,7 +487,7 @@ const Rosetta = observer(() => {
                     />
                     <Typography variant='subtitle2'>
                       Templates are created using the{' '}
-                      <a href='https://handlebarsjs.com/guide/#what-is-handlebars'>
+                      <a href='https://handlebarsjs.com/guide/#what-is-handlebars' rel='noopener noreferrer' target="_blank">
                         Handlebars
                       </a>{' '}
                       templating language.
@@ -543,7 +568,7 @@ const Rosetta = observer(() => {
 
                     <Typography variant='subtitle2'>
                       Learn more about the{' '}
-                      <a href='http://www.fhir.org/'>HL7 FHIR</a> standard.
+                      <a href='http://www.fhir.org/' rel='noopener noreferrer' target="_blank">HL7 FHIR</a> standard.
                     </Typography>
                   </Paper>
                 </Grid>

@@ -11,7 +11,9 @@ import {
   Menu,
   IconButton
 } from '@material-ui/core'
-import { Storage, Code, ArrowForwardIos, Assignment } from '@material-ui/icons'
+import {
+  Storage, Code, ArrowForwardIos, Help
+} from '@material-ui/icons'
 import fetch from 'cross-fetch'
 
 import settings from '../../../settings'
@@ -42,7 +44,8 @@ const Sidebar = ({
   setShowApiDocs,
   showApiDocs,
   setSnackbarOpen,
-  setSnackbarMessage
+  setSnackbarMessage,
+  toggleHelpDialog
 }) => {
   const classes = useStyles()
   const [ccdaTemplateOpen, setCcdaTemplateOpen] = useState(false)
@@ -104,7 +107,7 @@ const Sidebar = ({
 
             return r[messageName]
           }, hl7v2Level)
-          
+
           Object.assign(last, rest)
         }
 
@@ -141,7 +144,7 @@ const Sidebar = ({
 
             return r[messageName]
           }, cdaLevel)
-          
+
           Object.assign(last, rest)
         }
 
@@ -204,7 +207,7 @@ const Sidebar = ({
 
             return r[templateName]
           }, hl7v2Level)
-          
+
           Object.assign(last, rest)
         }
 
@@ -241,7 +244,7 @@ const Sidebar = ({
 
             return r[templateName]
           }, cdaLevel)
-          
+
           Object.assign(last, rest)
         }
 
@@ -523,6 +526,16 @@ const Sidebar = ({
               })}
             </Menu>
           ) : null}
+          <Divider />
+          <ListItem button onClick={toggleHelpDialog} id='rosetta-help'>
+            <ListItemIcon>
+              <Help />
+            </ListItemIcon>
+            <ListItemText primary='Help' />
+            <IconButton className={classes.iconButton}>
+              <ArrowForwardIos />
+            </IconButton>
+          </ListItem>
         </List>
       </div>
     </Slide>
