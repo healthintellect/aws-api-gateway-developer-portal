@@ -35,12 +35,14 @@ The code parsing the HL7 messages pasted into the juxtapose tool is running in y
 
 Rosetta uses the Microsoft FHIR converter API to convert a HL7v2 message or a CDA into a single FHIR resource or a bundle of FHIR resources based on a template of your choosing.
 
+The message conversion performed by the Rosetta API uses the data from a source HL7 or CDA message 
+to populate a FHIR resourse based on the template selected. Any message data pasted into the rosetta tool is being sent to the API however NO PHI is stored by our servers.
+
 Use Rosetta to:
 
-Convert HL7 messages into FHIR resources
-Translate CCDA messages into FHIR resources
-Build custom templates to accomadate your data format needs
-The message conversion performed by the Rosetta API uses the data from a source HL7 or CDA message to populate a FHIR resourse based on the template selected. Any message data pasted into the rosetta tool is being sent to the API however NO PHI is stored by our servers.
+* Convert HL7 messages into FHIR resources
+* Translate CDA messages into FHIR resources
+* Build custom templates to accomadate your custom data format
 #### Mirage
 The Mirage tool can be used to generate common healthcare interoperability message types that contain fake data in commonly used fields.
 
