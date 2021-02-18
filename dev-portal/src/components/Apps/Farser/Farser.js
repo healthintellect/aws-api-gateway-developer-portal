@@ -78,6 +78,10 @@ const useStyles = makeStyles((theme) => ({
   },
   messageButtons: {
     marginLeft: 'auto'
+  },
+  accordionHeader: {
+    flexBasis: '33.33%',
+    flexShrink: 0
   }
 }), { index: 1 })
 
@@ -277,7 +281,13 @@ const Farser = observer(() => {
     e.preventDefault()
 
     // Get pasted data via clipboard API
-    navigator.clipboard.readText().then((clipText) => setMessage(clipText))
+    navigator.clipboard.readText().then((clipText) => {
+      processMessage({
+        target: {
+          value: clipText
+        }
+      })
+    })
 
     e.target.focus()
   }
@@ -312,7 +322,16 @@ const Farser = observer(() => {
               aria-controls='messageToParse'
               id='message-parse'
             >
-              <Typography variant='h6'>Message to Parse</Typography>
+              <Typography variant='h6' className={classes.accordionHeader}>Message to Parse</Typography>
+              {(messageInfo && messageInfo.messageType) && (
+                <Grid container spacing={1} flexDirection="row">
+                  <Grid item xs={12}>
+                    Message Type: <strong>{messageInfo && messageInfo.messageType}</strong>
+                  </Grid>
+                  <Grid item xs={12}>
+                    Message Version: <strong>{messageInfo && messageInfo.messageVersion}</strong>
+                  </Grid>
+                </Grid>)}
             </AccordionSummary>
             <AccordionDetails>
               <Grid container spacing={1} direction='column'>
@@ -384,17 +403,6 @@ const Farser = observer(() => {
               </Grid>
             </AccordionDetails>
           </Accordion>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            <Typography variant='h6'>Message Information</Typography>
-            <Typography variant='body1'>
-              Message Type: {messageInfo && messageInfo.messageType}
-            </Typography>
-            <Typography variant='body1'>
-              Message Version: {messageInfo && messageInfo.messageVersion}
-            </Typography>
-          </Paper>
         </Grid>
         <Grid item xs={2}>
           <Paper className={classes.paper}>
