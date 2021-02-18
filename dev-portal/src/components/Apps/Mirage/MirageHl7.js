@@ -8,7 +8,6 @@ import {
   CardContent,
   Grid,
   TextField,
-  Button,
   Snackbar,
   Checkbox,
   FormControl,
@@ -274,6 +273,7 @@ class MirageHl7 extends PureComponent {
   }
 
   handleMessageVersionSelect = (event) => {
+    console.log('version change event: ', event)
     this.setState({ [event.target.name]: event.target.value })
   }
 
@@ -407,6 +407,7 @@ class MirageHl7 extends PureComponent {
                       <Select
                         labelId='message-version-label'
                         id='message-version'
+                        name="messageVersion"
                         value={messageVersion}
                         onChange={this.handleMessageVersionSelect}
                       >
