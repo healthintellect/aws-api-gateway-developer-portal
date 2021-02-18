@@ -273,7 +273,6 @@ class MirageHl7 extends PureComponent {
   }
 
   handleMessageVersionSelect = (event) => {
-    console.log('version change event: ', event)
     this.setState({ [event.target.name]: event.target.value })
   }
 
