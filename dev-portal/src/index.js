@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { CookiesProvider } from 'react-cookie'
 import { ThemeProvider } from '@material-ui/core/styles'
+import * as queryString from 'query-string'
 import TagManager from 'react-gtm-module'
 import ReactGA from 'react-ga'
 
@@ -15,8 +16,6 @@ const tagManagerArgs = {
 TagManager.initialize(tagManagerArgs)
 ReactGA.initialize('UA-69135965-2')
 ReactGA.pageview(window.location.pathname + window.location.search)
-
-import * as queryString from 'query-string'
 
 // content-fragments
 import { loadFragments } from 'services/get-fragments'
